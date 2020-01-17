@@ -11,7 +11,7 @@ Installation is done using the
 [`npm install` command](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
 
 ```bash
-$ npm install akc-hstx-sdk --registry http://node.sdk.akachain.io:4873 --save
+$ npm install hstx-node-sdk --save
 ```
 
 ## Quick Start
@@ -21,7 +21,7 @@ Using async/await functions to get response when calling HSTx's functions.
 
 ```js
 // Import SDK
-var HSTx = require('akc-hstx-sdk');
+var HSTx = require('hstx-node-sdk');
 
 // Two d-app functions invoke and query to interact with Akachain chaincode.
 var invoke = require('../smartcontract/invoke');
