@@ -58,7 +58,7 @@ async _invoke(req, res, funcName, hstxFunc, args) {
  * Set route /CreateProposal
  */
 createProposal() {
-  this.router.post('/CreateProposal', async (req, res) => {
+  router.post('/CreateProposal', async (req, res) => {
     let proposal = {
       Message: req.body.Message,
       CreatedBy: req.body.CreatedBy,
@@ -70,7 +70,7 @@ createProposal() {
     logger.debug(args)
     logger.debug(proposal)
 
-    this._invoke(req, res, "CreateProposal", this.hstx.createProposal, args)
+    _invoke(req, res, "CreateProposal", hstx.createProposal, args)
   });
 }
 ```
