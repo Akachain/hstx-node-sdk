@@ -23,16 +23,54 @@ Using async/await functions to get response when calling HSTx's functions.
 // Import SDK
 var HSTx = require('hstx-node-sdk');
 
-// Two d-app functions invoke and query to interact with Akachain chaincode.
-var invoke = require('../smartcontract/invoke');
-var query = require('../smartcontract/query');
+// Initialize hstx with the network endpoints
+var hstx = new HSTx(peerNames, channelName, chaincodeName, orgName, userName);
 
-// Initialize hstx with two required d-app functions: invoke and query
-var hstx = new HSTx(invoke, query);
+/**
+ * Invoke to chaincode via functions of HSTx-SDK instance
+ * @param {Request} req request from client
+ * @param {Response} res response to client
+ * @param {string} funcName name of HSTx's function
+ * @param {function} hstxFunc HSTx's function used to invoke to chaincode
+ */
+async _invoke(req, res, funcName, hstxFunc, args) {
+  try {
+    // Invoke to chaincode by 'func'
+    let payload = await hstxFunc(args)
 
-// Calling functions via hstx
-async createProposal() {
-  var proposal = { proposal: 'something' }
-  var payload = await hstx.createProposal(proposal);
+    // Response success to client
+    res.send({
+      status: 200,
+      payload: payload
+    });
+  } catch (err) {
+    // Response error to client
+    res.send({
+      status: 500,
+      message: 'Calling failed!',
+      err: err.message
+    });
+  }
+}
+
+/** PROPOSAL FUNCTIONS **************************************************/
+/**
+ * Set route /CreateProposal
+ */
+createProposal() {
+  this.router.post('/CreateProposal', async (req, res) => {
+    let proposal = {
+      Message: req.body.Message,
+      CreatedBy: req.body.CreatedBy,
+      CreatedAt: new Date(),
+      UpdatedAt: new Date()
+    }
+    let args = []
+    args.push(JSON.stringify(proposal))
+    logger.debug(args)
+    logger.debug(proposal)
+
+    this._invoke(req, res, "CreateProposal", this.hstx.createProposal, args)
+  });
 }
 ```
