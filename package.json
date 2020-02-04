@@ -1,6 +1,6 @@
 {
   "name": "akc-hstx-sdk",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "directories": {
@@ -11,5 +11,8 @@
   },
   "keywords": [],
   "author": "hongsongp97",
-  "license": "GPL-2.0-or-later"
+  "license": "GPL-2.0-or-later",
+  "dependencies": {
+    "akc-node-sdk": "^1.2.1-f"
+  }
 }
