@@ -8,6 +8,7 @@ SDK for writing node.js decentralized applications to interact with Akachain Hig
 1. Before installing, [download and install Node.js](https://nodejs.org/en/download/).
 
 2. Grant access permission for registry https://npm.pkg.github.com/
+
     Create file .npmrc
     ```js
     // Linux/MacOS command
