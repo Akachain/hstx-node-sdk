@@ -5,14 +5,32 @@ SDK for writing node.js decentralized applications to interact with Akachain Hig
 
 ## Installation
 
-Before installing, [download and install Node.js](https://nodejs.org/en/download/).
+1. Before installing, [download and install Node.js](https://nodejs.org/en/download/).
 
-Installation is done using the
+2. Grant access permission for registry https://npm.pkg.github.com/
+    Create file .npmrc
+    ```js
+    // Linux/MacOS command
+    touch .npmrc
+    ```
+    Config registry to install akaChain SDK
+    ```js
+    // Linux/MacOS command
+    echo "registry=https://npm.pkg.github.com/Akachain" >> .npmrc
+    ```
+    Get your personal access token on github:
+    Access to [gibhub](https://github.com), choose [settings](https://github.com/settings/profile) at right-top of page. Click on _Developer settings_, _Personal access tokens_ then generate your token. Copy it to replace your_token in the following command
+    ```js
+    // Linux/MacOS command
+    echo "//npm.pkg.github.com/:_authToken=your_token"
+    ```
+
+3. Installation is done using the
 [`npm install` command](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
 
-```bash
-$ npm install @akachain/hstx-node-sdk@1.0.3
-```
+    ```bash
+    npm install @akachain/hstx-node-sdk
+    ```
 
 ## Quick Start
 
