@@ -11,7 +11,7 @@ Installation is done using the
 [`npm install` command](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
 
 ```bash
-$ npm install hstx-node-sdk --save
+$ npm install @akachain/hstx-node-sdk@1.0.3
 ```
 
 ## Quick Start
@@ -21,7 +21,7 @@ Using async/await functions to get response when calling HSTx's functions.
 
 ```js
 // Import SDK
-var HSTx = require('hstx-node-sdk');
+const HSTx = require('@akachain/hstx-node-sdk');
 
 // Initialize hstx with the network endpoints
 var hstx = new HSTx(peerNames, channelName, chaincodeName, orgName, userName);
