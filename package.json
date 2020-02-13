@@ -1,6 +1,6 @@
 {
   "name": "@akachain/hstx-node-sdk",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "AKC nodejs SDK for High Secure Transaction",
   "main": "index.js",
   "directories": {
