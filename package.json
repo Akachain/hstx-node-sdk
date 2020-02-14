@@ -1,6 +1,6 @@
 {
   "name": "@akachain/hstx-node-sdk",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "AKC nodejs SDK for High Secure Transaction",
   "main": "index.js",
   "directories": {
@@ -11,7 +11,7 @@
   "author": "hongsongp97",
   "license": "GPL-2.0-or-later",
   "dependencies": {
-    "@akachain/akc-node-sdk": "^2.1.0"
+    "@akachain/akc-node-sdk": "^2.1.1"
   },
   "publishConfig": { "registry": "https://npm.pkg.github.com/" },
   "repository": "git://github.com/Akachain/hstx-node-sdk.git"
