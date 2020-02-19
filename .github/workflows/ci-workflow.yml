@@ -22,5 +22,6 @@ jobs:
         scope: '@hongsongp97'
     - name: Authenticate with GitHub package registry
       run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_TOKEN }}" >> ~/.npmrc
+    - run: cat .npmrc
     - name: Install dependencies
       run: npm install
