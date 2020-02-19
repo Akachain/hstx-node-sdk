@@ -16,11 +16,10 @@ jobs:
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
-        always-auth: true
         node-version: ${{ matrix.node-version }}
         registry-url: https://npm.pkg.github.com
         scope: '@hongsongp97'
     - name: Authenticate with GitHub package registry
-      run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> ~/.npmrc
+      run: echo "@hongsongp97:registry=https://npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> ~/.npmrc
     - name: Install dependencies
       run: npm install
