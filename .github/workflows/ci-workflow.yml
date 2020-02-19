@@ -16,9 +16,12 @@ jobs:
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
+        always-auth: true
         node-version: ${{ matrix.node-version }}
-    - run: npm ci
+        registry-url: https://npm.pkg.github.com
+    - name: Install dependencies
+      run: npm install
     - run: npm run build --if-present
     - run: npm test
       env:
-        CI: true
+        NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
