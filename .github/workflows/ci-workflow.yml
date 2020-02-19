@@ -19,6 +19,7 @@ jobs:
         always-auth: true
         node-version: ${{ matrix.node-version }}
         registry-url: https://npm.pkg.github.com
+        scope: '@hongsongp97'
     - name: Install dependencies
       run: npm install
       env:
