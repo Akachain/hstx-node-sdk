@@ -20,7 +20,7 @@ SDK for writing node.js decentralized applications to interact with Akachain Hig
     echo "registry=https://npm.pkg.github.com/Akachain" >> .npmrc
     ```
     Get your personal access token on github:
-    Access to [gibhub](https://github.com), choose [settings](https://github.com/settings/profile) at right-top of page. Click on _Developer settings_, _Personal access tokens_ then generate your token. Copy it to replace your_token in the following command
+    Access to [github](https://github.com), choose [settings](https://github.com/settings/profile) at right-top of page. Click on _Developer settings_, _Personal access tokens_ then generate your token. Copy it to replace your_token in the following command
     ```js
     // Linux/MacOS command
     echo "//npm.pkg.github.com/:_authToken=your_token" >> .npmrc
@@ -45,51 +45,18 @@ const HSTx = require('@akachain/hstx-node-sdk');
 // Initialize hstx with the network endpoints
 var hstx = new HSTx(peerNames, channelName, chaincodeName, orgName, userName);
 
-/**
- * Invoke to chaincode via functions of HSTx-SDK instance
- * @param {Request} req request from client
- * @param {Response} res response to client
- * @param {string} funcName name of HSTx's function
- * @param {function} hstxFunc HSTx's function used to invoke to chaincode
- */
-async _invoke(req, res, funcName, hstxFunc, args) {
-  try {
-    // Invoke to chaincode by 'func'
-    let payload = await hstxFunc(args)
+// Example using Proposal's functions
+let message = "Message";
+let createdBy = "Admin1";
 
-    // Response success to client
-    res.send({
-      status: 200,
-      payload: payload
-    });
-  } catch (err) {
-    // Response error to client
-    res.send({
-      status: 500,
-      message: 'Calling failed!',
-      err: err.message
-    });
-  }
-}
+let payload = await hstx.createProposal(message, createdBy)
 
-/** PROPOSAL FUNCTIONS **************************************************/
-/**
- * Set route /CreateProposal
- */
-createProposal() {
-  router.post('/CreateProposal', async (req, res) => {
-    let proposal = {
-      Message: req.body.Message,
-      CreatedBy: req.body.CreatedBy,
-      CreatedAt: new Date(),
-      UpdatedAt: new Date()
-    }
-    let args = []
-    args.push(JSON.stringify(proposal))
-    logger.debug(args)
-    logger.debug(proposal)
-
-    _invoke(req, res, "CreateProposal", hstx.createProposal, args)
+if (payload.Result.Status == 200) {
+  // Responding success to the caller
+  console.log({
+    status: 200,
+    payload: payload
   });
+} else {
+  throw new Error(payload.Message)
 }
-```
