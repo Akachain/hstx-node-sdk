@@ -42,21 +42,37 @@ Using async/await functions to get response when calling HSTx's functions.
 // Import SDK
 const HSTx = require('@akachain/hstx-node-sdk');
 
-// Initialize hstx with the network endpoints
-var hstx = new HSTx(peerNames, channelName, chaincodeName, orgName, userName);
+// Initialize hstx
+var hstx = new HSTx();
 
-// Example using Proposal's functions
-let message = "Message";
-let createdBy = "Admin1";
+// Example using SUPER ADMIN FUNCTIONS
+let superAdminName = "Super Admin 1";
+let registrationData = "BQSOfoKf_m5Xtq-7ci7ecBlgkVsqd_1eMWRMbibqLKvy6IVkq4XvSE4E603Ax31Yzqvmijv1zrtymGC137142GdDQKE3-Vu6KyvA__1qBtHMQ453D1fcwHeNZYG0jQgI7rXrUt7p-7n38qIxzfjptZyQOwVE0h1Fl6sib2OYknpj53QwggE0MIHboAMCAQICCnd4pWTIyIslRLQwCgYIKoZIzj0EAwIwFTETMBEGA1UEAxMKVTJGIElzc3VlcjAaFwswMDAxMDEwMDAwWhcLMDAwMTAxMDAwMFowFTETMBEGA1UEAxMKVTJGIERldmljZTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABI5vkvXlovobtYfUv2QGambtWJ62i3koZvB3iRHIkwQeb0fCWNnxIo0p-XqbEBkV7LMqy0y-plss896MGsQibXCjFzAVMBMGCysGAQQBguUcAgEBBAQDAgQwMAoGCCqGSM49BAMCA0gAMEUCIQDBo6aOLxanIUYnBX9iu3KMngPnobpi0EZSTkVtLC8_cwIgC1945RGqGBKfbyNtkhMifZK05n7fU-gW37Bdnci5D94wRAIgUYdDQLq2DAldyTI4UZVeTSJ5k9lPJ8802OcsWlBpdY8CIDGFY4Ux8i2tcFdQHeQsAWMn_X3pZrBigw6WqcfRg-ns";
 
-let payload = await hstx.createProposal(message, createdBy)
+let superAdminObject = hstx.createSuperAdmin(superAdminName, registrationData)
+console.log(superAdminObject)
+```
 
-if (payload.Result.Status == 200) {
-  // Responding success to the caller
-  console.log({
-    status: 200,
-    payload: payload
-  });
-} else {
-  throw new Error(payload.Message)
+```js
+// Initialize hstx with the network connection
+var hstx2 = new HSTx().instantWithNetworkConnection(peerNames, channelName, chaincodeName, orgName, userName);
+
+// Example using PROPOSAL FUNCTIONS
+async function createProposal() {
+  let message = "Message";
+  let createdBy = "Admin1";
+
+  let payload = await hstx2.createProposal(message, createdBy)
+
+  if (payload.Result.Status == 200) {
+    // Responding success to the caller
+    console.log({
+      status: 200,
+      payload: payload
+    });
+  } else {
+    throw new Error(payload.Message)
+  }
 }
+createProposal()
+```
