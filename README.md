@@ -49,29 +49,36 @@ var hstx = new HSTx();
 let superAdminName = "Super Admin 1";
 let registrationData = "BQSOfoKf_m5Xtq-7ci7ecBlgkVsqd_1eMWRMbibqLKvy6IVkq4XvSE4E603Ax31Yzqvmijv1zrtymGC137142GdDQKE3-Vu6KyvA__1qBtHMQ453D1fcwHeNZYG0jQgI7rXrUt7p-7n38qIxzfjptZyQOwVE0h1Fl6sib2OYknpj53QwggE0MIHboAMCAQICCnd4pWTIyIslRLQwCgYIKoZIzj0EAwIwFTETMBEGA1UEAxMKVTJGIElzc3VlcjAaFwswMDAxMDEwMDAwWhcLMDAwMTAxMDAwMFowFTETMBEGA1UEAxMKVTJGIERldmljZTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABI5vkvXlovobtYfUv2QGambtWJ62i3koZvB3iRHIkwQeb0fCWNnxIo0p-XqbEBkV7LMqy0y-plss896MGsQibXCjFzAVMBMGCysGAQQBguUcAgEBBAQDAgQwMAoGCCqGSM49BAMCA0gAMEUCIQDBo6aOLxanIUYnBX9iu3KMngPnobpi0EZSTkVtLC8_cwIgC1945RGqGBKfbyNtkhMifZK05n7fU-gW37Bdnci5D94wRAIgUYdDQLq2DAldyTI4UZVeTSJ5k9lPJ8802OcsWlBpdY8CIDGFY4Ux8i2tcFdQHeQsAWMn_X3pZrBigw6WqcfRg-ns";
 
-let superAdminObject = hstx.createSuperAdmin(superAdminName, registrationData)
-console.log(superAdminObject)
+hstx.createSuperAdmin(superAdminName, registrationData)
+  .then(superAdminObject => console.log(superAdminObject))
 ```
 
 ```js
 // Initialize hstx with the network connection
-var hstx2 = new HSTx().instantWithNetworkConnection(peerNames, channelName, chaincodeName, orgName, userName);
+var peerNames = 'peeer1',
+  channelName = 'mychannel',
+  chaincodeName = 'sample_cc',
+  orgName = 'Org1',
+  userName = 'user1';
+var hstx2 = HSTx.instantWithNetworkConnection(peerNames, channelName, chaincodeName, orgName, userName);
 
 // Example using PROPOSAL FUNCTIONS
 async function createProposal() {
-  let message = "Message";
-  let createdBy = "Admin1";
+  try {
+    let message = "Message";
+    let createdBy = "Admin1";
 
-  let payload = await hstx2.createProposal(message, createdBy)
+    let payload = await hstx2.createProposal(message, createdBy)
 
-  if (payload.Result.Status == 200) {
-    // Responding success to the caller
-    console.log({
-      status: 200,
-      payload: payload
-    });
-  } else {
-    throw new Error(payload.Message)
+    if (payload.Result.Status == 200) {
+      // Responding success to the caller
+      console.log({
+        status: 200,
+        payload: payload
+      });
+    }
+  } catch (err) {
+    throw err
   }
 }
 createProposal()
